@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Advanced Website</title>
+    <style>
+        /* CSS Styles */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            color: #ffa500;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-control-left, .carousel-control-right {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .carousel-control-left:hover, .carousel-control-right:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        section {
+            margin-top: 40px;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        /* Media Query for responsive design */
+        @media (max-width: 768px) {
+            nav a {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .carousel img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to Our Advanced Website</h1>
+        <p>We provide cutting-edge solutions for your business needs</p>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Image Carousel Section -->
+    <section class="container">
+        <div class="carousel">
+            <img src="https://www.shutterstock.com/image-illustration/c-code-on-dark-background-600nw-1896170293.jpg" alt="C and C++">
+            <img src="https://media.istockphoto.com/id/1403644222/photo/illustration-demonstrates-the-routing-of-ip-packets-throughout-the-internet-a-lan-computer.jpg?s=612x612&w=0&k=20&c=MCdnCecf2rfzLnsnivu5DOXL-6Ata-Sq6MGLvmXngPc=" alt="Python">
+            <img src="https://contentstatic.techgig.com/photo/90078629.cms" alt="Java">
+        </div>
+        <div class="carousel-controls">
+            <button class="carousel-control-left">&#8592;</button>
+            <button class="carousel-control-right">&#8594;</button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="container">
+        <h2>Our Services</h2>
+        <p>My first website</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="form-response"></div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Advanced Website. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // JavaScript for Carousel
+        let currentSlide = 0;
+        const images = document.querySelectorAll('.carousel img');
+        const leftButton = document.querySelector('.carousel-control-left');
+        const rightButton = document.querySelector('.carousel-control-right');
+
+        function changeSlide() {
+            images.forEach((img, index) => {
+                img.style.transform = `translateX(-${currentSlide * 100}%)`;
+            });
+        }
+
+        leftButton.addEventListener('click', () => {
+            currentSlide = (currentSlide === 0) ? images.length - 1 : currentSlide - 1;
+            changeSlide();
+        });
+
+        rightButton.addEventListener('click', () => {
+            currentSlide = (currentSlide === images.length - 1) ? 0 : currentSlide + 1;
+            changeSlide();
+        });
+
+        // JavaScript for Contact Form Validation
+        const contactForm = document.getElementById('contact-form');
+        const formResponse = document.getElementById('form-response');
+
+        contactForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                formResponse.textContent = 'Thank you for your message!';
+                formResponse.style.color = 'green';
+                contactForm.reset();
+            } else {
+                formResponse.textContent = 'Please fill out all fields.';
+                formResponse.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
